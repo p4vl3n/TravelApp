@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <div id="container">
+    <ul>
+        <li>{{ profile.first_name }} Hello </li>
+         <li>{{ information }} There </li>
+
+        {{ profile.date_of_birth }}
+        {{ profile.country_of_residence }}
+    </ul>
+    <a class="active" href="{% url 'edit profile' request.user.id %}">Edit</a>
+    </div>
+    <button>Edit</button>
+{% endblock %}

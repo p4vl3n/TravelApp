@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+
+    <div id="container">
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+{#        {{ profile_form }}#}
+        <button>Register</button>
+    </form>
+
+
+    </div>
+{% endblock %}

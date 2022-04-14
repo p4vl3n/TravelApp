@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <div id="container">
+        <div>
+            <ul>
+{#                {% for trip in object_list %}#}
+{#                    <li>{{ trip.destination }} {{ trip.duration }} {{ trip.organiser }}</li>#}
+{#                {% empty %}#}
+{#                    You haven't been on any trips..#}
+{#                {% endfor %}#}
+            </ul>
+        </div>
+
+
+    </div>
+    <button>Edit</button>
+{% endblock %}

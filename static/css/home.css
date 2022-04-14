@@ -1,0 +1,134 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+.logo {
+  overflow: hidden;
+  background-color: inherit;
+}
+
+form.logo-search input[type=text] {
+  float: right;
+  padding: 10px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+.logo-search .search-container button:hover {
+  background: #ccc;
+}
+form.logo-search button {
+    float: right;
+    display: inline-block;
+    text-align: left;
+    width: 5%;
+    margin: 0;
+    padding: 10px;
+    font-size: 17px;
+    cursor: pointer;
+}
+img {
+  width: 120px;
+  height: 90px;
+}
+div.bg {
+  height: 100%;
+  background-image: url("/static/images/AroundTheWorldSecond.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.pill-nav {
+    background-color:  #c2d1f0;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+/* Style the links inside the navigation bar */
+.pill-nav a {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 22px;
+  border-radius: 5px;
+}
+
+/* Change the color of links on hover */
+.pill-nav a:hover {
+  background-color:  #ffff80;
+  color: black;
+  border-radius: 16px;
+}
+
+/* Add a color to the active/current link */
+.pill-nav a.active {
+  background-color: #00997a;
+  color: white;
+}
+
+/* Right-aligned section inside the top navigation */
+.topnav-right {
+  background-color: #c2d1f0;
+  overflow: hidden;
+  float: right;
+  border-radius: 5px;
+}
+
+.topnav-right a {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 22px;
+  border-radius: 5px;
+}
+
+.topnav-right a.active:hover{
+  background-color:  #00997a;
+  color: white;
+  border-radius: 16px;
+}
+
+.topnav-right a.active {
+  background-color: #00997a;
+  color: white;
+}
+
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 60px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #c2d1f0;
+  color: black;
+  text-align: center;
+}
+
+.form-control {
+  position: fixed;
+  left: 50%;
+  bottom: 50%;
+  width: 60%;
+
+}
