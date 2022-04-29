@@ -1,15 +1,29 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base1.html' %}
 {% load static %}
 {% block page_content %}
-    <div id="container">
+    <div class="container">
     <ul>
-        <li>{{ profile.first_name }} Hello </li>
-         <li>{{ information }} There </li>
+        <li>{{ profile.first_name }}</li>
+        <li>{{ profile.last_name }}</li>
+        <li>{{ profile.country_of_residence }}</li>
+        <li>{{ profile.date_of_birth }}</li>
+        <li>{{ profile.email }}</li>
+        {% if profile.profile_picture %}
+            <li><img src="{{ profile.profile_picture.url }}"></li>
+        {% endif %}
 
-        {{ profile.date_of_birth }}
-        {{ profile.country_of_residence }}
+
+        {% if has_friends %}
+            {% for friend in friends %}
+                <a class="active" href="{% url 'profile view' friend.pk %}">
+                    <li>{{ friend }}</li>
+                </a>
+            {% endfor %}
+        {% endif %}
+
     </ul>
-    <a class="active" href="{% url 'edit profile' request.user.id %}">Edit</a>
+    {% if request.user.id == profile.pk %}
+        <a class="active" href="{% url 'edit profile' request.user.id %}">Edit</a>
+    {% endif %}
     </div>
-    <button>Edit</button>
 {% endblock %}

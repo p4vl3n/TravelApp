@@ -1,0 +1,20 @@
+{% extends 'base/base1.html' %}
+{% load static %}
+{% block page_content %}
+    <div class="container">
+
+            <ul>
+                {% for profile in object_list %}
+                    <li>
+                        <a href="{% url 'profile view' profile.pk %}">
+                            {{ profile.first_name }}, {{ profile.last_name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+
+
+    </div>
+
+{% endblock %}

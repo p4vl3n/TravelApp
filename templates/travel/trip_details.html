@@ -1,0 +1,29 @@
+{% extends 'base/base1.html' %}
+{% load static %}
+{% block page_content %}
+    <div class="container">
+        <div>
+            <h1>Details about your trip</h1>
+            <ul class="itinerary themed">
+                <li>{{ trip.departure_date }}</li>
+                {% for traveller in travel_buddies %}
+                    <li>{{ traveller }}</li>
+                {% endfor %}
+                    <ul>
+                        {% for day in days %}
+                            <li>
+                                <a href="{% url 'day details' day.pk %}">
+                                    {{ day }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                <li>{{ trip.destination }}</li>
+            </ul>
+
+        </div>
+
+
+    </div>
+    <button>Edit</button>
+{% endblock %}

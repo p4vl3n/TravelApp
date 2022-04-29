@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 from django.urls import reverse
 
+
 from static.countries_list import countries as COUNTRIES
 from django.db import models
 from django.contrib.auth import models as auth_models
@@ -40,13 +41,17 @@ class Profile(models.Model):
     GENDERS = [(x, x) for x in POSSIBLE_GENDERS]
     first_name = models.CharField(
         max_length=NAME_MAX_LENGTH,
+        blank=True,
     )
 
     last_name = models.CharField(
         max_length=NAME_MAX_LENGTH,
+        blank=True,
     )
 
     email = models.EmailField()
+
+    profile_picture = models.ImageField()
 
     country_of_residence = models.CharField(
         max_length=max(len(x) for x in COUNTRIES),
@@ -62,7 +67,10 @@ class Profile(models.Model):
         blank=True,
     )
 
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(
+        null=True,
+        blank=True,
+    )
 
     user = models.OneToOneField(
         ApplicationUser,
@@ -70,10 +78,35 @@ class Profile(models.Model):
         primary_key=True,
     )
 
-    @staticmethod
+    friends = models.ManyToManyField(ApplicationUser, blank=True, related_name='friends')
+
+    first_log_in = models.BooleanField(default=True)
+
     def get_absolute_url(self):
-        return reverse('home')
+        return reverse('profile view', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name} from {self.country_of_residence} born on {self.date_of_birth}'
+        return f'{self.first_name} {self.last_name}'
 
+
+class RelationshipManager(models.Manager):
+    @staticmethod
+    def invitations_received(receiver):
+        qs = Relationship.objects.filter(receiver=receiver, status='sent')
+        return qs
+
+
+class Relationship(models.Model):
+    STATUS_OPTIONS = [('sent', 'sent'),
+                      ('accepted', 'accepted'),
+                      ('rejected', 'rejected')]
+    sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sender')
+    receiver = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='receiver')
+    status = models.CharField(max_length=max(max([len(y) for y in x]) for x in STATUS_OPTIONS), choices=STATUS_OPTIONS)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    objects = RelationshipManager()
+
+    def __str__(self):
+        return f'{self.sender}-{self.receiver}-{self.status}'

@@ -1,0 +1,25 @@
+{% extends 'base/base1.html' %}
+{% load static %}
+{% block page_content %}
+    <div class="container">
+        <div>
+            <form method="post" class="form-control-sm" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <label> Photo Description </label>
+                <input required name="photo description" type="text" class="form-control">
+                <br>
+                <input required name="images" type="file" multiple class="form-control-file">
+                <button type="submit">Edit</button>
+            </form>
+{#            <a href="{% url 'image upload' %}">#}
+{#                <button>Upload images</button>#}
+{#            </a>#}
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

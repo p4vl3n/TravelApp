@@ -43,11 +43,14 @@ div.bg {
 .pill-nav {
     background-color:  #c2d1f0;
     overflow: hidden;
-    border-radius: 5px;
+    padding: 5px;
+  display: flex;
+  width: 100%;
 }
 
 /* Style the links inside the navigation bar */
 .pill-nav a {
+  float: left;
   display: inline-block;
   color: black;
   text-align: center;
@@ -55,6 +58,24 @@ div.bg {
   text-decoration: none;
   font-size: 22px;
   border-radius: 5px;
+  margin-right: 3px;
+}
+.pill-nav form {
+  display: flex;
+  margin-left: auto;
+  margin-right: 10px;
+}
+.pill-nav form input {
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+.pill-nav form input:hover {
+  border: 1px solid rgba(0,0,0,0.6);
+}
+.pill-nav form input:focus {
+  border: 1px solid rgba(0,0,0,1);
 }
 
 /* Change the color of links on hover */
@@ -70,11 +91,16 @@ div.bg {
   color: white;
 }
 
-/* Right-aligned section inside the top navigation */
+ /*Right-aligned section inside the top navigation*/
+.topnav-left {
+  display: inline-flex;
+  flex: 1;
+}
 .topnav-right {
   background-color: #c2d1f0;
   overflow: hidden;
   float: right;
+  display: inline;
   border-radius: 5px;
 }
 
@@ -86,6 +112,10 @@ div.bg {
   text-decoration: none;
   font-size: 22px;
   border-radius: 5px;
+  margin-left: 3px;
+}
+.topnav-right a:first-child {
+  margin-left: 0;
 }
 
 .topnav-right a.active:hover{
@@ -103,7 +133,7 @@ div.bg {
   padding: 16px;
 }
 
-/* The sticky class is added to the header with JS when it reaches its scroll position */
+ /*The sticky class is added to the header with JS when it reaches its scroll position*/
 .sticky {
   position: fixed;
   top: 0;
@@ -125,10 +155,57 @@ div.bg {
   text-align: center;
 }
 
-.form-control {
-  position: fixed;
-  left: 50%;
-  bottom: 50%;
-  width: 60%;
+/*.form-control {*/
+/*  position: fixed;*/
+/*  left: 50%;*/
+/*  bottom: 50%;*/
+/*  width: 60%;*/
 
+/*}*/
+
+ul.itinerary {
+  display: block;
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  padding: 1rem;
+  border-radius: 5px;
+}
+ul.themed {
+  background: #c2d1f0;
+}
+
+ul.itinerary li {
+  margin-bottom: 1rem;
+}
+
+ul.itinerary ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  list-style-type: none;
+}
+ul.itinerary ul li {
+  border: 1px solid black;
+  padding: 0;
+  margin: 0;
+}
+
+
+.card-box {
+    box-shadow: 0 0 30px 0;
+    padding: 20px;
+    margin-left: 120px;
+    background-position: right 35% bottom 45%;
+    box-sizing: border-box;
+    border-radius: 15px;
+    float: left;
+    height: 500px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 70px;
+    margin-top: 20px;
 }

@@ -1,11 +1,30 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base1.html' %}
 {% load static %}
 {% block page_content %}
-    <div id="container">
-        <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button>Log in</button>
-        </form>
+    <div class="container">
+       <form method='post' class="#">
+           {% csrf_token %}
+           {{ form }}
+{#           {% for field in form.visible_fields %}#}
+{#               {{ field.label }}#}
+{#               {{ field }}#}
+{#           {% endfor %}#}
+{#           {% for hidden in form.hidden_fields %}#}
+{#               {{ hidden }}#}
+{#           {% endfor %}#}
+{#           <div class="col-auto">#}
+{#               <label for="staticEmail2" class="visually-hidden">Email</label>#}
+{#               <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">#}
+{#           </div>#}
+{#           <div class="col-auto">#}
+{#               <label for="inputPassword2" class="visually-hidden">Password</label>#}
+{#               <input type="password" class="form-control" id="inputPassword2" placeholder="Password">#}
+{#           </div>#}
+{#           <div class="col-auto">#}
+{#               <button type="submit" class="btn btn-primary">Confirm identity</button>#}
+{#            </div>#}
+
+    <button type="submit" class="btn btn-primary">Log In</button>
+           </form>
     </div>
 {% endblock %}

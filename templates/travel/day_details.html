@@ -1,0 +1,21 @@
+{% extends 'base/base1.html' %}
+{% load static %}
+{% block page_content %}
+    <div class="container">
+        <div>
+            Details about your day number {{ day.day_number }}
+            {% for picture in pictures %}
+               <img src="{{ picture.image.url }}">
+            {% endfor %}
+
+            {{ day.description }}
+
+        </div>
+        <a href="{% url 'edit day' day.pk %}">
+            <button>Edit</button>
+        </a>
+
+
+    </div>
+
+{% endblock %}
