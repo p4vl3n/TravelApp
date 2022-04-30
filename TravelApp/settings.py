@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'TravelApp.wsgi.application'
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'travel',
-            'USER': 'postgres',
-            'PASSWORD': 'P4r0l4t4861o3o',
+            'NAME': 'some_name',
+            'USER': 'some_user',
+            'PASSWORD': 'some_password',
             'HOST': '127.0.0.1',
             'PORT': '5432',
         },
