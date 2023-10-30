@@ -19,6 +19,7 @@ class RestrictedView(mixins.PermissionRequiredMixin, generic.TemplateView, gener
     template_name = 'home.html'
 
     def get_redirect_url(self, *args, **kwargs):
+        print(self.request)
         profile = Profile.objects.get(user_id=self.request.user.id)
         if profile.first_log_in:
             return redirect('edit profile', kwargs={'pk': self.request.user.id})
@@ -27,12 +28,18 @@ class RestrictedView(mixins.PermissionRequiredMixin, generic.TemplateView, gener
 class RegisterUserView(generic.CreateView):
     form_class = UserRegistrationForm
     template_name = 'accounts/register.html'
-    success_url = reverse_lazy('home')
+    # success_url = reverse_lazy('edit profile')
 
     def form_valid(self, form):
         result = super().form_valid(form)
         login(self.request, self.object)
         return result
+
+    def get_success_url(self):
+        # pk = self.object.mode
+        pk = self.object.id
+        a = 5
+        return reverse_lazy('edit profile', kwargs={'pk': pk})
 
 
 def edit_profile(request, pk):

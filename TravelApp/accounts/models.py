@@ -1,9 +1,10 @@
 from django.db import models
 
 # Create your models here.
+from django.template.defaultfilters import slugify
 from django.urls import reverse
 
-
+from TravelApp.common.helpers import get_random_code
 from static.countries_list import countries as COUNTRIES
 from django.db import models
 from django.contrib.auth import models as auth_models
@@ -42,11 +43,13 @@ class Profile(models.Model):
     first_name = models.CharField(
         max_length=NAME_MAX_LENGTH,
         blank=True,
+        null=True,
     )
 
     last_name = models.CharField(
         max_length=NAME_MAX_LENGTH,
         blank=True,
+        null=True,
     )
 
     email = models.EmailField()
@@ -82,8 +85,35 @@ class Profile(models.Model):
 
     first_log_in = models.BooleanField(default=True)
 
+    slug = models.SlugField(unique=True, blank=True)
+
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    __initial_first_name = None
+    __initial_last_name = None
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.first_name = self.__initial_first_name
+        self.last_name = self.__initial_last_name
+
+    def save(self, *args, **kwargs):
+        exists = False
+        if self.first_name != self.__initial_first_name or self.last_name != self.__initial_last_name or self.slug == "":
+            if self.first_name and self.last_name:
+                to_slug = slugify(str(self.first_name) + " " + str(self.last_name))
+                exists = Profile.objects.filter(slug=to_slug).exists()
+                while exists:
+                    to_slug = slugify(to_slug + " " + str(get_random_code()))
+                    exists = Profile.objects.filter(slug=to_slug).exists()
+            else:
+                to_slug = str(self.user)
+        self.slug = to_slug
+        super().save(*args, **kwargs)
+
     def get_absolute_url(self):
-        return reverse('profile view', kwargs={'pk': self.pk})
+        return reverse('profile view', kwargs={'slug': self.slug})
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

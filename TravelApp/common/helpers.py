@@ -1,3 +1,6 @@
+import uuid
+
+
 class BootstrapFormMixin:
     fields = {}
 
@@ -10,3 +13,8 @@ class BootstrapFormMixin:
                 field.widget.attrs['class'] = ''
             field.widget.attrs['class'] += 'form-control-plaintext'
             field.widget.attrs['placeholder'] = field.label
+
+
+def get_random_code():
+    code = str(uuid.uuid4())[:8].replace('-', '').lower()
+    return code

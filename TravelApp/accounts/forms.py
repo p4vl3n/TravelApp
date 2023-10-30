@@ -35,7 +35,7 @@ class EditUserProfileForm(BootstrapFormMixin, forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ('user_id', 'friends', 'user', 'first_log_in',)
+        exclude = ('user_id', 'friends', 'user', 'first_log_in', 'slug',)
 
         widgets = {
             'date_of_birth': forms.SelectDateWidget(
