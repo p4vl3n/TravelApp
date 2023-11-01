@@ -5,6 +5,10 @@ from TravelApp.common.helpers import BootstrapFormMixin
 from TravelApp.travel.models import Trip, Image, TripDay
 
 
+class DateInput(django_forms.DateInput):
+    input_type = 'date'
+
+
 class CreateTripForm(BootstrapFormMixin, django_forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateTripForm, self).__init__(*args, **kwargs)
@@ -13,6 +17,10 @@ class CreateTripForm(BootstrapFormMixin, django_forms.ModelForm):
     class Meta:
         model = Trip
         fields = '__all__'
+        widgets = {
+            'departure_date': DateInput(),
+            'departure_time': django_forms.TimeInput(attrs={'type': 'time'})
+        }
 
 
 class DeleteTripForm(BootstrapFormMixin, django_forms.ModelForm):

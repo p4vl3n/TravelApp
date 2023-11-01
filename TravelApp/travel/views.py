@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -11,7 +12,7 @@ import django.views.generic as views
 
 # Create your views here.
 from TravelApp.accounts.models import Profile, ApplicationUser
-from TravelApp.travel.forms import FriendSearchForm
+from TravelApp.travel.forms import FriendSearchForm, CreateTripForm
 from TravelApp.travel.models import Trip, TripDay, Image
 
 
@@ -19,22 +20,34 @@ class HomeView(views.TemplateView):
     template_name = 'home.html'
 
 
-class UserWishlist(views.TemplateView):
+class CreateWishTrip(views.CreateView):
+    pass
+
+
+class UserWishlist(views.ListView):
+    model = Trip
     template_name = 'travel/user_wishlist.html'
+
+    def get_queryset(self):
+        trips = Trip.objects.filter(added_by=self.request.user, on_wishlist=True)
+        return trips
+    # def get_context_object_name(self, *, object_list=None, **kwargs):
+    #     queryset
 
 
 class CreateTrip(views.CreateView):
     model = Trip
     template_name = 'travel/create_trip.html'
     success_url = reverse_lazy('user trips')
-    fields = ('duration',
-              'destination',
-              'departure_date',
-              'departure_time',
-              'travellers',
-              'important_files',
-              'trip_pictures',
-              )
+    # fields = ('duration',
+    #           'destination',
+    #           'departure_date',
+    #           'departure_time',
+    #           'travellers',
+    #           'important_files',
+    #           'trip_pictures',
+    #           )
+    form_class = CreateTripForm
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -47,8 +60,7 @@ class CreateTrip(views.CreateView):
             trip_day = TripDay(trip=form.instance,
                                day_number=day+1)
             trip_day.save()
-
-        return result
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class UserTrips(views.ListView):

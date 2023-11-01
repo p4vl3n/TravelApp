@@ -35,6 +35,8 @@ class Trip(models.Model):
 
     trip_pictures = models.ImageField(upload_to='mediafiles/', blank=True, default=None)
 
+    on_wishlist = models.BooleanField(default=False)
+
     def __str__(self):
         return f'{self.duration} trip to {self.destination}'
 
@@ -52,3 +54,7 @@ class Image(models.Model):
     description = models.TextField()
     image = models.ImageField()
     day = models.ForeignKey(TripDay, on_delete=models.CASCADE)
+
+#
+# class WishTrip(Trip):
+#     wishlist = True
